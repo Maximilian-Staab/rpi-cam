@@ -108,7 +108,7 @@ RUN poetry env info
 
 # Done to avoid re-istalling already installed systme packages
 # Locking inside the container due to different platform support
-RUN poetry export --without-hashes --with dev -f requirements.txt -o requirements.txt
+RUN poetry export --without-hashes -f requirements.txt -o requirements.txt
 RUN pip install -r requirements.txt
 # might interfere with already insalled packages
 RUN #poetry install --no-interaction -vvv
