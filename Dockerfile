@@ -81,7 +81,9 @@ RUN apt-get install --assume-yes --no-install-recommends  \
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:/root/.local/bin:$PATH"
 
 # debian packaged version was too old for the new repository feature of poetry
-RUN pip install poetry
+# the piwheel thing is an issue with hashes, no idea why it was happening, though
+RUN apt-get install --assume-yes --no-install-recommends pipx
+RUN pipx install poetry
 RUN poetry --version
 
 # NOTE: This only works when installing with pip: https://github.com/python-poetry/poetry/issues/6035
