@@ -3,7 +3,7 @@ name = "rpi-cam"
 version = "1.0.0"
 description = "Example project for generating a docker image intended to run on Raspberry PIs (armhf) with libcamera and picamera2 support."
 authors = ["Maximilian Staab <maximilian.staab@mailbox.org>"]
-license = "BSD-2-Clause-Patent"
+license = "MIT OR Apache-2.0"
 readme = "README.md"
 
 [tool.poetry.dependencies]
