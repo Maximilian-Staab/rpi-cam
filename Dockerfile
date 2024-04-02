@@ -1,41 +1,41 @@
-FROM python:3.11-slim as base
+FROM python:3.12-slim as base
 
 ENV DEBIAN_FRONTEND="noninteractive" \
-    # python envs
-    PYTHONUNBUFFERED=1 \
-    # prevents python creating .pyc files
-    PYTHONDONTWRITEBYTECODE=1 \
-    \
-    # pip
-    PIP_NO_CACHE_DIR=off \
-    # PIP_DISABLE_PIP_VERSION_CHECK=on \
-    PIP_DEFAULT_TIMEOUT=100 \
-    \
-    # Fixes for cryptography builds
-    CARGO_NET_GIT_FETCH_WITH_CLI=true \
-    CRYPTOGRAPHY_DONT_BUILD_RUST=1 \
-    \
-    # poetry
-    # https://python-poetry.org/docs/configuration/#using-environment-variables
-    # make poetry install to this location
-    POETRY_HOME="/opt/poetry" \
-    # make poetry create the virtual environment in the project's root
-    # it gets named `.venv`
-    POETRY_VIRTUALENVS_IN_PROJECT=true \
-    # do not ask any interactive question
-    POETRY_NO_INTERACTION=1
+  # python envs
+  PYTHONUNBUFFERED=1 \
+  # prevents python creating .pyc files
+  PYTHONDONTWRITEBYTECODE=1 \
+  \
+  # pip
+  PIP_NO_CACHE_DIR=off \
+  # PIP_DISABLE_PIP_VERSION_CHECK=on \
+  PIP_DEFAULT_TIMEOUT=100 \
+  \
+  # Fixes for cryptography builds
+  CARGO_NET_GIT_FETCH_WITH_CLI=true \
+  CRYPTOGRAPHY_DONT_BUILD_RUST=1 \
+  \
+  # poetry
+  # https://python-poetry.org/docs/configuration/#using-environment-variables
+  # make poetry install to this location
+  POETRY_HOME="/opt/poetry" \
+  # make poetry create the virtual environment in the project's root
+  # it gets named `.venv`
+  POETRY_VIRTUALENVS_IN_PROJECT=true \
+  # do not ask any interactive question
+  POETRY_NO_INTERACTION=1
 
 
 RUN apt-get update && apt-get install --assume-yes --no-install-recommends  \
-    build-essential  \
-    cmake  \
-    meson  \
-    ninja-build  \
-    qemu-user-static  \
-    git \
-    libssl-dev libffi-dev \
-    python3-yaml python3-virtualenv python3-dev libpython3-dev python3-pkgconfig python3-pybind11 pybind11-dev  \
-    python3-jinja2 python3-ply libcap-dev python3-cryptography libjpeg-dev libatlas-base-dev python3-numpy
+  build-essential  \
+  cmake  \
+  meson  \
+  ninja-build  \
+  qemu-user-static  \
+  git \
+  libssl-dev libffi-dev \
+  python3-yaml python3-virtualenv python3-dev libpython3-dev python3-pkgconfig python3-pybind11 pybind11-dev  \
+  python3-jinja2 python3-ply libcap-dev python3-cryptography libjpeg-dev libatlas-base-dev python3-numpy
 
 
 # Use wheels whenever possible
@@ -73,9 +73,9 @@ RUN ldconfig
 
 # Requirements for Picamera2
 RUN apt-get install --assume-yes --no-install-recommends  \
-    libtiff6  \
-    libopenjp2-7 \
-    libxcb1
+  libtiff6  \
+  libopenjp2-7 \
+  libxcb1
 
 # prepend poetry and venv to path
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:/root/.local/bin:$PATH"
